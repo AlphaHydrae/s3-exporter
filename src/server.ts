@@ -3,18 +3,12 @@ import express, { Request } from 'express';
 import isString from 'lodash/isString.js';
 import log4js from 'log4js';
 
-import { collectPrometheusMetrics } from './metrics.js';
+import { collectPrometheusMetrics, S3ExporterParams } from './metrics.js';
 import { serializeOpenMetricsMetric } from './open-metrics.js';
 import { emptyArray } from './utils.js';
 
 const logger = log4js.getLogger('server');
 logger.level = 'INFO';
-
-type S3ExporterParams = {
-  readonly bucket: string;
-  readonly region: string;
-  readonly prefixes: readonly string[];
-};
 
 export function startServer(): Promise<void> {
   const server = express();
@@ -40,11 +34,7 @@ export function startServer(): Promise<void> {
       return;
     }
 
-    const result = await collectPrometheusMetrics(
-      config.bucket,
-      config.region,
-      config.prefixes
-    );
+    const result = await collectPrometheusMetrics(config);
     res
       .set(
         'Content-Type',
@@ -86,6 +76,13 @@ function parseParameters(req: Request): R.Result<S3ExporterParams, string> {
         parsePrefixes,
         R.map(prefixes => ({ ...params, prefixes }))
       )
+    ),
+    R.flatMap(params =>
+      pipe(
+        req,
+        parseCredentials,
+        R.map(credentials => ({ ...params, ...credentials }))
+      )
     )
   );
 }
@@ -122,4 +119,23 @@ function parsePrefixes({
   }
 
   return R.Ok(prefixes);
+}
+
+function parseCredentials(
+  req: Request
+): R.Result<Pick<S3ExporterParams, 'accessKeyId' | 'secretAccessKey'>, string> {
+  const basicAuth = req.headers.authorization;
+  if (!basicAuth?.startsWith('Basic ')) {
+    return R.Error('Missing or invalid "Authorization" header');
+  }
+
+  const credentials = Buffer.from(basicAuth.slice(6), 'base64').toString(
+    'utf8'
+  );
+  const [accessKeyId, secretAccessKey] = credentials.split(':', 2);
+  if (!accessKeyId || !secretAccessKey) {
+    return R.Error('Invalid "Authorization" header format');
+  }
+
+  return R.Ok({ accessKeyId, secretAccessKey });
 }

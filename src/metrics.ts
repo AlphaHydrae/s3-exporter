@@ -14,19 +14,29 @@ import { OpenMetricsMetric } from './open-metrics.js';
 
 const logger = getLogger('metrics');
 
+export type S3ExporterParams = {
+  readonly bucket: string;
+  readonly region: string;
+  readonly prefixes: readonly string[];
+  readonly accessKeyId: string;
+  readonly secretAccessKey: string;
+};
+
 // eslint-disable-next-line max-lines-per-function
-export async function collectPrometheusMetrics(
-  bucket: string,
-  region: string,
-  prefixes: readonly string[]
-): Promise<readonly OpenMetricsMetric[]> {
+export async function collectPrometheusMetrics({
+  bucket,
+  region,
+  prefixes,
+  accessKeyId,
+  secretAccessKey
+}: S3ExporterParams): Promise<readonly OpenMetricsMetric[]> {
   const start = Date.now();
 
   const s3Client = new S3Client({
     region,
     credentials: {
-      accessKeyId: process.env['AWS_ACCESS_KEY_ID'] ?? 'changeme',
-      secretAccessKey: process.env['AWS_SECRET_ACCESS_KEY'] ?? 'changeme'
+      accessKeyId,
+      secretAccessKey
     }
   });
 
