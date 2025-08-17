@@ -1,0 +1,84 @@
+{
+  "name": "s3-exporter",
+  "version": "0.1.0",
+  "description": "Prometheus exporter for AWS S3 buckets",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "bin": {
+    "s3-exporter": "./bin/s3-exporter.js"
+  },
+  "scripts": {
+    "build": "npm run build:clean && npm run build:prod",
+    "build:clean": "del ./dist",
+    "build:dev": "tsc --project ./tsconfig.dev.json",
+    "build:prod": "tsc --project ./tsconfig.prod.json",
+    "build:watch": "tsc --project ./tsconfig.dev.json --watch",
+    "check": "npm run build && npm run test && npm run lint && npm run format",
+    "check:write": "npm run build && npm run test && npm run lint:write && npm run format:write",
+    "doctoc": "doctoc --gitlab README.md CHANGELOG.md guides/*.md && prettier --write README.md CHANGELOG.md guides/*.md",
+    "format": "prettier --check README.md CHANGELOG.md 'guides/**/*.md' '**/*.{js,json,ts}'",
+    "format:write": "prettier --write README.md CHANGELOG.md 'guides/**/*.md' '**/*.{js,json,ts}'",
+    "lint": "eslint --max-warnings 0 .",
+    "lint:write": "eslint --fix --max-warnings 0 .",
+    "serve:watch": "onchange --delay 500 --initial --kill \"dist/**/*\" -- node ./bin/s3-exporter",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --collectCoverage false --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alphahydrae/s3-exporter.git"
+  },
+  "author": "Simon Oulevay <npm@alphahydrae.ch>",
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.864.0",
+    "@mobily/ts-belt": "^4.0.0-rc.5",
+    "@nestjs/common": "^11.0.9",
+    "@nestjs/core": "^11.0.9",
+    "express": "^5.1.0",
+    "fp-ts": "^2.11.8",
+    "io-ts": "^2.2.21",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "log4js": "^6.4.1",
+    "reflect-metadata": "~0.2.1",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.2.0",
+    "@types/yargs": "^17.0.8",
+    "cross-env": "^10.0.0",
+    "del-cli": "^6.0.0",
+    "doctoc": "^2.1.0",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-import-resolver-typescript": "^4.3.4",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-sonarjs": "^3.0.1",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "jest": "^30.0.5",
+    "jest-environment-node": "^30.0.5",
+    "onchange": "^7.1.0",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.7.0",
+    "typescript": "^5.1.6",
+    "typescript-eslint": "^8.19.1"
+  },
+  "engines": {
+    "node": "^20 || ^22 || ^24",
+    "npm": ">= 8"
+  }
+}

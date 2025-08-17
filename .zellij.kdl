@@ -1,0 +1,29 @@
+pane_frames true
+
+layout {
+  default_tab_template {
+    children
+    pane size=1 borderless=true {
+      plugin location="zellij:compact-bar"
+    }
+  }
+
+  tab name="test" {
+    pane command="npm" {
+      args "run" "test:watch"
+    }
+  }
+
+  tab name="shell" focus=true {
+    pane borderless=true
+  }
+
+  tab name="build" split_direction="vertical" {
+    pane command="npm" {
+      args "run" "build:watch"
+    }
+    pane command="npm" {
+      args "run" "serve:watch"
+    }
+  }
+}
