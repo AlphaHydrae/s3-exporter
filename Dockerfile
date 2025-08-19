@@ -22,4 +22,6 @@ RUN addgroup -S s3-exporter && \
     adduser -D -G s3-exporter -H -S -s /sbin/nologin s3-exporter && \
     chown -R s3-exporter:s3-exporter /usr/src/app
 
+USER s3-exporter:s3-exporter
+
 CMD ["/usr/src/app/bin/s3-exporter"]
