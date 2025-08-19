@@ -98,7 +98,7 @@ export class Server {
         pipe(
           result,
           A.map(serializeOpenMetricsMetric),
-          A.join('\n\n'),
+          A.join('\n'),
           S.append('\n# EOF\n')
         )
       );
