@@ -34,7 +34,7 @@ jobs:
       - name: Install asdf
         uses: asdf-vm/actions/install@v4
         with:
-          asdf_branch: v0.18.0
+          asdf_version: v0.18.0
 
       - name: Check source code formatting
         run: |
