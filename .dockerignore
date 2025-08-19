@@ -2,6 +2,7 @@
 /.ackrc
 /dist
 /.editorconfig
+/.envrc
 /node_modules
 /.prettier*
 /README.md
