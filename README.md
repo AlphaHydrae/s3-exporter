@@ -18,6 +18,9 @@ docker build -t s3-exporter .
 
 docker run --init -p "3000:3000" --rm s3-exporter
 
+export AWS_ACCESS_KEY_ID=changeme
+export AWS_SECRET_ACCESS_KEY=changeme
+
 curl -u "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
   "http://localhost:3000/metrics?bucket=my-bucket&region=us-east-1"
 ```
@@ -33,13 +36,20 @@ authentication.
 > by configuring a
 > [module](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md#module).
 
-The following query parameters are used for configuration:
+The following query parameters are used to configure the produced metrics:
 
 | Parameter | Required | Description                                                     |
 | :-------- | :------- | :-------------------------------------------------------------- |
 | `bucket`  | **yes**  | Name of the AWS S3 bucket to collect metrics for                |
 | `region`  | **yes**  | AWS region where the bucket is located                          |
 | `prefix`  | _no_     | Prefix to collect metrics for (may be specified multiple times) |
+
+The following options can be used to configure the exporter's server:
+
+| Command line option | Environment variables  | Default value           | Description                                                                   |
+| :------------------ | :--------------------- | :---------------------- | :---------------------------------------------------------------------------- |
+| `--base-url`, `-u`  | `S3_EXPORTER_BASE_URL` | `http://localhost:3000` | The base URL of the exporter (defaults to localhost with the configured port) |
+| `--port`, `-p`      | `S3_EXPORTER_PORT`     | `3000`                  | The port on which the exporter's server listens on                            |
 
 ## Metrics
 
