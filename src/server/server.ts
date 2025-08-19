@@ -1,4 +1,4 @@
-import { A, G, O, pipe } from '@mobily/ts-belt';
+import { A, G, O, pipe, S } from '@mobily/ts-belt';
 import express, { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
 import log4js from 'log4js';
@@ -94,7 +94,14 @@ export class Server {
         'Content-Type',
         'application/openmetrics-text; version=1.0.0; charset=utf-8'
       )
-      .send(pipe(result, A.map(serializeOpenMetricsMetric), A.join('\n\n')));
+      .send(
+        pipe(
+          result,
+          A.map(serializeOpenMetricsMetric),
+          A.join('\n\n'),
+          S.append('\n# EOF\n')
+        )
+      );
   }
 
   #handleError(err: unknown, _req: Request, res: Response): void {
