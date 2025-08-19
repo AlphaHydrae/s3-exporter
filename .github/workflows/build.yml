@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: build
+
+on:
+  push:
+    branches:
+      - "**/*"
+  schedule:
+    # Minute (0-59), Hour (0-23), Day of the month (1-31), Month of the Year (1-12), Day of the week (0-6, 0 = Sunday)
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    name: Build the Docker image
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v5
+
+      - name: Build the image
+        run: |
+          docker build -t alphahydrae/s3-exporter:test .
+
+  test:
+    runs-on: ubuntu-24.04
+    name: Run automated tests
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v5
+        with:
+          submodules: true
+
+      - name: Install asdf
+        uses: asdf-vm/actions/install@v4
+        with:
+          asdf_branch: v0.18.0
+
+      - name: Install pv & rclone
+        run: |
+          sudo rm /var/lib/man-db/auto-update
+          sudo apt install -y pv
+          curl https://rclone.org/install.sh | sudo bash
+
+      - name: Run the automated test suite
+        run: |
+          make check
+
+      - name: Ensure there are no uncommitted changes
+        run: |
+          git status --porcelain
+          test -z "$(git status --porcelain)"

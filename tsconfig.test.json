@@ -3,5 +3,5 @@
   "compilerOptions": {
     "resolveJsonModule": true
   },
-  "include": ["package.json", "src/**/*", "tests/**/*"]
+  "include": ["jest.config.ts", "package.json", "src/**/*", "tests/**/*"]
 }
