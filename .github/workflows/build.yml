@@ -36,15 +36,17 @@ jobs:
         with:
           asdf_branch: v0.18.0
 
-      - name: Install pv & rclone
+      - name: Check source code formatting
         run: |
-          sudo rm /var/lib/man-db/auto-update
-          sudo apt install -y pv
-          curl https://rclone.org/install.sh | sudo bash
+          npm run format
+
+      - name: Perform static code analysis
+        run: |
+          npm run lint
 
       - name: Run the automated test suite
         run: |
-          make check
+          npm test
 
       - name: Ensure there are no uncommitted changes
         run: |
