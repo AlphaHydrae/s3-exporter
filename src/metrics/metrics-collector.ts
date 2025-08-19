@@ -362,7 +362,7 @@ function createOldestMetrics(
   return [
     {
       type: 'gauge',
-      name: `s3_oldest_${what}_last_modified_date`,
+      name: `s3_oldest_${what}_last_modified_date_seconds`,
       unit: 'seconds',
       help: `The last modification time of the oldest ${whatHuman}, in seconds since the epoch`,
       values: [
@@ -395,7 +395,7 @@ function createNewestMetrics(
   return [
     {
       type: 'gauge',
-      name: `s3_newest_${what}_last_modified_date`,
+      name: `s3_newest_${what}_last_modified_date_seconds`,
       unit: 'seconds',
       help: `The last modification time of the newest ${whatHuman}, in seconds since the epoch`,
       values: [

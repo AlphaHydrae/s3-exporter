@@ -367,7 +367,7 @@ function oldestObjectLastModifiedDateMetric(
 ): OpenMetricsMetric {
   return {
     help: 'The last modification time of the oldest object, in seconds since the epoch',
-    name: 's3_oldest_object_last_modified_date',
+    name: 's3_oldest_object_last_modified_date_seconds',
     type: 'gauge',
     unit: 'seconds',
     values: [
@@ -403,7 +403,7 @@ function oldestObjectVersionLastModifiedDateMetric(
 ): OpenMetricsMetric {
   return {
     help: 'The last modification time of the oldest object version, in seconds since the epoch',
-    name: 's3_oldest_object_version_last_modified_date',
+    name: 's3_oldest_object_version_last_modified_date_seconds',
     type: 'gauge',
     unit: 'seconds',
     values: [
@@ -439,7 +439,7 @@ function newestObjectLastModifiedDateMetric(
 ): OpenMetricsMetric {
   return {
     help: 'The last modification time of the newest object, in seconds since the epoch',
-    name: 's3_newest_object_last_modified_date',
+    name: 's3_newest_object_last_modified_date_seconds',
     type: 'gauge',
     unit: 'seconds',
     values: [
@@ -475,7 +475,7 @@ function newestObjectVersionLastModifiedDateMetric(
 ): OpenMetricsMetric {
   return {
     help: 'The last modification time of the newest object version, in seconds since the epoch',
-    name: 's3_newest_object_version_last_modified_date',
+    name: 's3_newest_object_version_last_modified_date_seconds',
     type: 'gauge',
     unit: 'seconds',
     values: [

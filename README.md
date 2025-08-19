@@ -52,25 +52,25 @@ The following options can be used to configure the exporter's server:
 
 These are the metrics returned for a bucket:
 
-| Metric                                        | Type    | Unit      | Number of values | Description                                                                         |
-| :-------------------------------------------- | :------ | :-------- | :--------------- | :---------------------------------------------------------------------------------- |
-| `s3_success`                                  | `gauge` | -         | `1`              | Whether the S3 exporter was able to collect metrics successfully                    |
-| `s3_queries`                                  | `gauge` | -         | `1`              | The number of queries made to S3 to collect metrics                                 |
-| `s3_objects_count`                            | `gauge` | -         | `p + 1`          | The number of objects for the bucket/prefix combination                             |
-| `s3_object_versions_count`                    | `gauge` | -         | `p + 1`          | The number of object versions for the bucket/prefix combination                     |
-| `s3_objects_size_sum_bytes`                   | `gauge` | `bytes`   | `p + 1`          | The sum of the size of all objects for the bucket/prefix combination                |
-| `s3_object_versions_size_sum_bytes`           | `gauge` | `bytes`   | `p + 1`          | The sum of the size of all object versions for the bucket/prefix combination        |
-| `s3_largest_object_size_bytes`                | `gauge` | `bytes`   | `p + 1`          | The size of the largest object for the bucket/prefix combination                    |
-| `s3_largest_object_version_size_bytes`        | `gauge` | `bytes`   | `p + 1`          | The size of the largest object version for the bucket/prefix combination            |
-| `s3_oldest_object_last_modified_date`         | `gauge` | -         | `p + 1`          | The last modification time of the oldest object, in seconds since the epoch         |
-| `s3_oldest_object_size_bytes`                 | `gauge` | `bytes`   | `p + 1`          | The byte size of the oldest object                                                  |
-| `s3_oldest_object_version_last_modified_date` | `gauge` | -         | `p + 1`          | The last modification time of the oldest object version, in seconds since the epoch |
-| `s3_oldest_object_version_size_bytes`         | `gauge` | `bytes`   | `p + 1`          | The byte size of the oldest object version                                          |
-| `s3_newest_object_last_modified_date`         | `gauge` | -         | `p + 1`          | The last modification time of the newest object, in seconds since the epoch         |
-| `s3_newest_object_size_bytes`                 | `gauge` | `bytes`   | `p + 1`          | The byte size of the newest object                                                  |
-| `s3_newest_object_version_last_modified_date` | `gauge` | -         | `p + 1`          | The last modification time of the newest object version, in seconds since the epoch |
-| `s3_newest_object_version_size_bytes`         | `gauge` | `bytes`   | `p + 1`          | The byte size of the newest object version                                          |
-| `s3_duration_seconds`                         | `gauge` | `seconds` | `1`              | How many seconds it took the S3 exporter to collect metrics                         |
+| Metric                                                | Type    | Unit      | Number of values | Description                                                                         |
+| :---------------------------------------------------- | :------ | :-------- | :--------------- | :---------------------------------------------------------------------------------- |
+| `s3_success`                                          | `gauge` | -         | `1`              | Whether the S3 exporter was able to collect metrics successfully                    |
+| `s3_queries`                                          | `gauge` | -         | `1`              | The number of queries made to S3 to collect metrics                                 |
+| `s3_objects_count`                                    | `gauge` | -         | `p + 1`          | The number of objects for the bucket/prefix combination                             |
+| `s3_object_versions_count`                            | `gauge` | -         | `p + 1`          | The number of object versions for the bucket/prefix combination                     |
+| `s3_objects_size_sum_bytes`                           | `gauge` | `bytes`   | `p + 1`          | The sum of the size of all objects for the bucket/prefix combination                |
+| `s3_object_versions_size_sum_bytes`                   | `gauge` | `bytes`   | `p + 1`          | The sum of the size of all object versions for the bucket/prefix combination        |
+| `s3_largest_object_size_bytes`                        | `gauge` | `bytes`   | `p + 1`          | The size of the largest object for the bucket/prefix combination                    |
+| `s3_largest_object_version_size_bytes`                | `gauge` | `bytes`   | `p + 1`          | The size of the largest object version for the bucket/prefix combination            |
+| `s3_oldest_object_last_modified_date_seconds`         | `gauge` | `seconds` | `p + 1`          | The last modification time of the oldest object, in seconds since the epoch         |
+| `s3_oldest_object_size_bytes`                         | `gauge` | `bytes`   | `p + 1`          | The byte size of the oldest object                                                  |
+| `s3_oldest_object_version_last_modified_date_seconds` | `gauge` | `seconds` | `p + 1`          | The last modification time of the oldest object version, in seconds since the epoch |
+| `s3_oldest_object_version_size_bytes`                 | `gauge` | `bytes`   | `p + 1`          | The byte size of the oldest object version                                          |
+| `s3_newest_object_last_modified_date_seconds`         | `gauge` | `seconds` | `p + 1`          | The last modification time of the newest object, in seconds since the epoch         |
+| `s3_newest_object_size_bytes`                         | `gauge` | `bytes`   | `p + 1`          | The byte size of the newest object                                                  |
+| `s3_newest_object_version_last_modified_date_seconds` | `gauge` | `seconds` | `p + 1`          | The last modification time of the newest object version, in seconds since the epoch |
+| `s3_newest_object_version_size_bytes`                 | `gauge` | `bytes`   | `p + 1`          | The byte size of the newest object version                                          |
+| `s3_duration_seconds`                                 | `gauge` | `seconds` | `1`              | How many seconds it took the S3 exporter to collect metrics                         |
 
 > [!TIP]
 > `p` stands for the number of prefixes specified in the request. For metrics
