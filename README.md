@@ -30,12 +30,6 @@ curl -u "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
 An AWS access key ID and secret access key must be provided using basic
 authentication.
 
-> [!TIP]
-> If you use the [Prometheus blackbox
-> exporter](https://github.com/prometheus/blackbox_exporter), this can be done
-> by configuring a
-> [module](https://github.com/prometheus/blackbox_exporter/blob/master/CONFIGURATION.md#module).
-
 The following query parameters are used to configure the produced metrics:
 
 | Parameter | Required | Description                                                     |
