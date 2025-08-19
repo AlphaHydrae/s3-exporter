@@ -2,6 +2,9 @@
 
 Prometheus exporter for AWS S3 buckets
 
+[![build](https://github.com/AlphaHydrae/s3-exporter/actions/workflows/build.yml/badge.svg)](https://github.com/AlphaHydrae/s3-exporter/actions/workflows/build.yml)
+[![MIT License](https://img.shields.io/static/v1?label=license&message=MIT&color=informational)](https://opensource.org/licenses/MIT)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
